@@ -1,0 +1,46 @@
+<?php
+// findroutes.php
+
+// Hàm tìm đường xe buýt dựa trên điểm xuất phát và điểm đến
+function findBusRoute($start, $end) {
+    
+    include 'database.php';
+    $connect = OpenCon();
+
+    // Chuyển các giá trị start và end thành chuỗi an toàn để tránh SQL injection
+    $start = mysqli_real_escape_string($conn, $start);
+    $end = mysqli_real_escape_string($conn, $end);
+
+    // Câu truy vấn SQL để tìm kiếm tuyến xe buýt
+    $sql = "SELECT tuyen, lo_trinh FROM routes";
+    $result = $conn->query($sql);
+
+    $foundRoute = false;
+
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $route = $row["lo_trinh"];
+            // Kiểm tra xem tuyến có chứa cả điểm xuất phát và điểm đến không
+            if (strpos($route, $start) !== false && strpos($route, $end) !== false) {
+                // Đảm bảo điểm xuất phát xuất hiện trước điểm đến
+                if (strpos($route, $start) < strpos($route, $end)) {
+                    // Hiển thị thông tin tuyến xe buýt
+                    echo "<div class='search-container'>";
+                    echo "<h2>Route found: " . htmlspecialchars($row["tuyen"]) . "</h2>";
+                    echo "<p>" . htmlspecialchars($route) . "</p>";
+                    echo "</div>";
+                    $foundRoute = true;
+                    break;
+                }
+            }
+        }
+    }
+
+    if (!$foundRoute) {
+        // Hiển thị thông báo nếu không tìm thấy tuyến xe buýt
+        echo "<div class='search-container'><h2>Không tìm thấy tuyến xe</h2></div>";
+    }
+
+    CloseCon($conn);
+}
+?>

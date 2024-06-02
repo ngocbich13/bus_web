@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    display: flex;
+    margin: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.left-column {
+    width: 70%;
+    padding: 20px;
+    border-right: 1px solid #ddd;
+}
+.right-column {
+    width: 30%;
+    padding: 20px;
+}
+.route-card {
+    display: flex;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    transition: box-shadow 0.3s;
+}
+.route-card:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.route-card img {
+    width: 150px;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+.route-card div {
+    flex: 1;
+}
+.route-card h3 {
+    margin-top: 0;
+}
+h2 {
+    margin-top: 0;
+}
+.right-column .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.right-column .grid li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #5ab465;
+    border: 1px solid #ddd;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    color: #fff;
+}
+.right-column .grid li:hover {
+    background-color: #ececec;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Thêm quy tắc CSS để thay đổi màu của thẻ a */
+a {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
