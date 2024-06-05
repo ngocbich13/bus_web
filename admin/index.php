@@ -1,9 +1,11 @@
 <?php
-session_start();
+
 $connect = new mysqli('localhost', 'root', '', 'bus_routes');
 
+if (!$connect) {
+    die("Connection failed: " . mysqli_connect_error());
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -11,6 +13,7 @@ $connect = new mysqli('localhost', 'root', '', 'bus_routes');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 <body>
 
@@ -40,7 +43,7 @@ if (isset($_POST['username'])) {
             echo "<script>alert('Tài khoản đang bị khóa');</script>";
         } else {
             $_SESSION['admin'] = $username; 
-            header("Location: controlpanel.php"); 
+            header("Location: admin/controlpanel.php"); 
             exit;
         }
     }
@@ -50,7 +53,7 @@ if (isset($_POST['username'])) {
 <section>
 <?php 
 if (isset($_SESSION['admin'])){
-    header("Location: controlpanel.php"); // Chuyển hướng đến controlpanel.php nếu đã đăng nhập
+    header("Location: admin/controlpanel.php"); // Chuyển hướng đến controlpanel.php nếu đã đăng nhập
     exit;
 } else {
     include 'login.php'; // Bao gồm login.php nếu chưa đăng nhập
